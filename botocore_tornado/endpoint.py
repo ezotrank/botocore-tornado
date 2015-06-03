@@ -12,6 +12,10 @@ class AsyncEndpoint(botocore.endpoint.Endpoint):
         self.http_client = AsyncHTTPClient()
 
     @gen.coroutine
+    def make_request(self, operation_model, request_dict):
+        return yield self._send_request(request_dict, operation_model)
+
+    @gen.coroutine
     def _send_request(self, request_dict, operation_model):
         request = self.create_request(request_dict, operation_model)
         body = request.body
