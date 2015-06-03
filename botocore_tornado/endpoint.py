@@ -13,7 +13,8 @@ class AsyncEndpoint(botocore.endpoint.Endpoint):
 
     @gen.coroutine
     def make_request(self, operation_model, request_dict):
-        return yield self._send_request(request_dict, operation_model)
+        result = yield self._send_request(request_dict, operation_model)
+        return result
 
     @gen.coroutine
     def _send_request(self, request_dict, operation_model):
