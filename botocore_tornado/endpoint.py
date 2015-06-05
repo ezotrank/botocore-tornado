@@ -31,7 +31,7 @@ class AsyncEndpoint(botocore.endpoint.Endpoint):
             body = ''
         http_request = HTTPRequest(
             url=request.url, headers=request.headers,
-            method=request.method, body=body)
+            method=request.method, body=body, request_timeout=60)
         http_response = yield self.http_client.fetch(http_request)
         protocol = operation_model.metadata['protocol']
         response_dict = {
